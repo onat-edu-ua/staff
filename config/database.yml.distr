@@ -1,0 +1,12 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: staff
+  pool: 5
+  username: staff
+  password: staff
+  host: 127.0.0.1
+#  schema_search_path: 'customers,public,rates,system,conferences'
+  port: 5432
+  min_messages: notice
+
