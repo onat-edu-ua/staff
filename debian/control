@@ -1,0 +1,15 @@
+Source: staff
+Maintainer: admin <admin@onat.edu.ua>
+Section: net
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9), devscripts
+
+Package: staff
+Section: net
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby, nginx, postgresql-client, curl
+Conflicts: staff
+Description: UI for staff admin panel
+	Staff user interface
+

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+user=staff
+
+if [ "$1" = "purge" ]; then 
+	update-rc.d staff remove
+	deluser --quiet --remove-home $user &>/dev/null || true
+	rm -fr /opt/$user
+
+fi
+
+#reload rsyslog
+[ -x /etc/init.d/rsyslog ] && /etc/init.d/rsyslog restart
+
+exit 0

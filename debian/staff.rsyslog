@@ -1,0 +1,2 @@
+if $programname == 'staff' then /var/log/staff/web.log
+if $programname == 'staff' then ~

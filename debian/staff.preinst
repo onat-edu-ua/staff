@@ -1,0 +1,6 @@
+#!/bin/bash
+
+adduser --quiet --system --group --disabled-password --shell /bin/false \
+--gecos "staff user interface" --home /opt/staff staff || true
+
+exit 0
