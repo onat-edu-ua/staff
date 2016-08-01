@@ -1,4 +1,5 @@
-ActiveAdmin.register EmployeePosition do
+ActiveAdmin.register Department do
+  menu parent: "Staff", priority: 3
 
   permit_params :name
 

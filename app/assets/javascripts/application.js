@@ -10,15 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require chosen-jquery
 
-$(document).ready(
-    function () {
-        $("select.chosen").chosen({no_results_text: "No results matched", width: '240px'});
-    }
-
-);

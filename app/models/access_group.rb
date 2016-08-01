@@ -4,4 +4,19 @@ class AccessGroup < ActiveRecord::Base
 
   validates_presence_of :name, :tag
   validates_uniqueness_of :name, :tag
+
+  def self.collection
+    order(:name)
+  end
+
+
+  def name=(nm)
+    self[:name] = nm.strip
+  end
+
+  def tag=(nm)
+    self[:tag] = nm.strip
+  end
+
+
 end

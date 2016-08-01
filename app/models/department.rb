@@ -4,4 +4,10 @@ class Department < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
+
+
+  def name=(nm)
+    self[:name] = nm.strip
+  end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002084845) do
+ActiveRecord::Schema.define(version: 20160801094225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,17 @@ ActiveRecord::Schema.define(version: 20151002084845) do
 
   add_index "departments", ["name"], name: "departments_name_key", unique: true, using: :btree
 
+  create_table "email_domains", force: :cascade do |t|
+    t.string "domain", null: false
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.string  "username",              null: false
+    t.integer "domain_id",   limit: 2, null: false
+    t.integer "employee_id"
+    t.string  "password",              null: false
+  end
+
   create_table "employee_positions", force: :cascade do |t|
     t.string "name", null: false
   end
@@ -95,6 +106,8 @@ ActiveRecord::Schema.define(version: 20151002084845) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "emails", "email_domains", column: "domain_id", name: "emails_domain_id_fkey"
+  add_foreign_key "emails", "employees", name: "emails_employee_id_fkey"
   add_foreign_key "employees", "departments", name: "employees_department_id_fkey"
   add_foreign_key "employees", "employee_positions", column: "position_id", name: "employees_position_id_fkey"
 end
