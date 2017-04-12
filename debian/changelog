@@ -1,3 +1,9 @@
+staff (0.1.0+nmu2) jessie; urgency=medium
+
+  * systemd unit added 
+
+ --  <sdi@lea>  Thu, 13 Apr 2017 00:46:31 +0300
+
 staff (0.1.0+nmu1) jessie; urgency=medium
 
   * switch to puma

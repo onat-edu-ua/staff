@@ -1,0 +1,23 @@
+[Unit]
+Description=STAFF web interface
+
+[Install]
+WantedBy=multi-user.target
+                                                                                                                                                                                             
+[Service]                                                                                                                                                                                    
+User=staff
+Group=staff
+ 
+Environment=RAILS_ENV=production
+Environment=RACK_ENV=production
+Environment=RAKE_ENV=production
+Environment=BUNDLE_GEMFILE=/opt/staff/Gemfile
+Environment=GEM_HOME=/opt/staff/.gem
+Environment=GEM_PATH=/opt/staff/.gem:/opt/staff/.bundle_gem
+
+RuntimeDirectory=staff
+ExecStart=/usr/bin/ruby /opt/staff/.gem/bin/bundle exec puma -d -b unix:///var/run/staff/staff.socket --redirect-stderr /opt/staff/log/puma.log -w 1 -t 4 -e production --pidfile /var/run/staff/puma.pid /opt/staff/config.ru
+PIDFile=/var/run/staff/puma.pid
+Type=forking
+#Restart=on-abnormal
+

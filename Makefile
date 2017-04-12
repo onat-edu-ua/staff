@@ -13,7 +13,7 @@ bundle_bin=.gem/bin/bundle
 
 bundle_cfg_dir = bundle_build_cfg
 
-app_files = bin app .gem .gemrc .bundle config config.ru db Gemfile Gemfile.lock lib public Rakefile README.rdoc vendor $(version_file)
+app_files = bin app .gem .gemrc config config.ru db Gemfile Gemfile.lock lib public Rakefile README.rdoc vendor $(version_file)
 
 exclude_files = config/database.yml
 
@@ -62,11 +62,6 @@ install: $(app_files)
 
 	@$(info:msg=install logrotate cfg file)
 	@install -v -m0644 -D debian/$(pkg_name).logrotate $(DESTDIR)/etc/logrotate.d/$(pkg_name)
-
-	@$(info:msg=install nginx example cfg file)
-	@install -v -m0644 -D config/usms.dist.nginx $(DESTDIR)/etc/nginx/sites-available/usms
-	@mkdir -p $(DESTDIR)/etc/nginx/sites-enabled
-	@ln -s "../sites-available/usms" $(DESTDIR)/etc/nginx/sites-enabled/usms
 
 
 clean:
