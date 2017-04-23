@@ -8,14 +8,17 @@ ActiveAdmin.register EmailDomain do
     id_column
     actions
     column :domain
+    column :active
   end
 
   filter :id
   filter :domain
+  filter :active
 
   form do |f|
     f.inputs "Details" do
       f.input :domain
+      f.input :active
     end
     f.actions
   end

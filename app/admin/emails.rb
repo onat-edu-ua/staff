@@ -12,11 +12,13 @@ ActiveAdmin.register Email do
     end
     column :username
     column :domain
+    column :active
   end
 
   filter :id
   filter :domain
   filter :username
+  filter :active
 
   form do |f|
     f.inputs "Details" do
@@ -24,6 +26,7 @@ ActiveAdmin.register Email do
       f.input :username
       f.input :domain
       f.input :password
+      f.input :active
     end
     f.actions
   end
