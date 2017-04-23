@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801094225) do
+ActiveRecord::Schema.define(version: 20170422203101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 20160801094225) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "aliases", force: :cascade do |t|
+    t.string   "dst",         limit: 128
+    t.string   "rewrite_dst", limit: 128
+    t.text     "description"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "aliases", ["dst"], name: "index_aliases_on_dst", unique: true, using: :btree
+
   create_table "departments", force: :cascade do |t|
     t.string "name", null: false
   end
@@ -64,15 +74,27 @@ ActiveRecord::Schema.define(version: 20160801094225) do
   add_index "departments", ["name"], name: "departments_name_key", unique: true, using: :btree
 
   create_table "email_domains", force: :cascade do |t|
-    t.string "domain", null: false
+    t.string   "domain",                    null: false
+    t.boolean  "active",     default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
+  add_index "email_domains", ["domain"], name: "index_email_domains_on_domain", unique: true, using: :btree
+
   create_table "emails", force: :cascade do |t|
-    t.string  "username",              null: false
-    t.integer "domain_id",   limit: 2, null: false
-    t.integer "employee_id"
-    t.string  "password",              null: false
+    t.string   "username",                             null: false
+    t.integer  "domain_id",   limit: 2,                null: false
+    t.integer  "employee_id"
+    t.string   "password",                             null: false
+    t.boolean  "active",                default: true
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
+
+  add_index "emails", ["username", "active", "domain_id"], name: "index_emails_on_username_and_active_and_domain_id", using: :btree
+  add_index "emails", ["username", "domain_id"], name: "emails_username_domain_id_idx", unique: true, using: :btree
+  add_index "emails", ["username", "domain_id"], name: "index_emails_on_username_and_domain_id", unique: true, using: :btree
 
   create_table "employee_positions", force: :cascade do |t|
     t.string "name", null: false

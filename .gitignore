@@ -19,3 +19,6 @@
 /config/database.yml
 /public/assets
 /.idea
+
+# Ignore vim swap files
+*.swp
